@@ -1,34 +1,40 @@
-export const dynamic = 'force-dynamic';
-
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { IoShieldCheckmarkOutline } from "react-icons/io5";
 
+export const dynamic = "force-dynamic";
+
 export default function VerifyOTPPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const email = searchParams.get("email"); // auto from login page
+  const [email, setEmail] = useState("");
 
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [isLoading, setIsLoading] = useState(false);
   const inputsRef = useRef([]);
 
-  // Handle typing in OTP boxes
+  // Only access searchParams on client
+  useEffect(() => {
+    const e = searchParams.get("email");
+    if (e) setEmail(e);
+  }, [searchParams]);
+
+  // OTP input handlers remain the same
   const handleChange = (e, index) => {
-    const value = e.target.value.replace(/\D/, ""); // allow only numbers
+    const value = e.target.value.replace(/\D/, "");
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
 
-    // move to next input automatically
-    if (value && index < 5) inputsRef.current[index + 1].focus();
+    if (value && index < 5 && inputsRef.current[index + 1]) {
+      inputsRef.current[index + 1].focus();
+    }
   };
 
-  // Handle backspace navigation
   const handleKeyDown = (e, index) => {
     if (e.key === "Backspace" && !otp[index] && index > 0) {
       inputsRef.current[index - 1].focus();
@@ -101,7 +107,7 @@ export default function VerifyOTPPage() {
         <button
           type="button"
           onClick={handleVerify}
-          disabled={isLoading}
+          disabled={isLoading || !email}
           className={`w-full py-3 rounded-lg text-white font-semibold transition-all duration-500 ${
             isLoading
               ? "opacity-50 cursor-not-allowed bg-gray-300 text-gray-600"
@@ -113,9 +119,12 @@ export default function VerifyOTPPage() {
 
         <p className="text-center text-sm text-gray-400 mt-6">
           Didn’t get a code?{" "}
-          <a href="#" className="text-[#9F00FF] font-medium hover:underline">
+          <button
+            type="button"
+            className="text-[#9F00FF] font-medium hover:underline"
+          >
             Resend OTP
-          </a>
+          </button>
         </p>
       </div>
     </div>
