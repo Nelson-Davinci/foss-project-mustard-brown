@@ -1,41 +1,38 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { IoShieldCheckmarkOutline } from "react-icons/io5";
 
-export default function VerifyOTPPage() {
+function VerifyOTPContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [email, setEmail] = useState("");
-
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [isLoading, setIsLoading] = useState(false);
   const inputsRef = useRef([]);
 
-  // Only access searchParams on client
   useEffect(() => {
     const e = searchParams.get("email");
-    if (e) setEmail(e);
+    if (e) setEmail(decodeURIComponent(e));
   }, [searchParams]);
 
-  // OTP input handlers remain the same
   const handleChange = (e, index) => {
-    const value = e.target.value.replace(/\D/, "");
+    const value = e.target.value.replace(/\D/g, "").slice(0, 1);
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
 
-    if (value && index < 5 && inputsRef.current[index + 1]) {
-      inputsRef.current[index + 1].focus();
+    if (value && index < 5) {
+      inputsRef.current[index + 1]?.focus();
     }
   };
 
   const handleKeyDown = (e, index) => {
     if (e.key === "Backspace" && !otp[index] && index > 0) {
-      inputsRef.current[index - 1].focus();
+      inputsRef.current[index - 1]?.focus();
     }
   };
 
@@ -54,12 +51,14 @@ export default function VerifyOTPPage() {
     setIsLoading(true);
     try {
       const res = await axios.post("/api/verify-otp", { email, otp: code });
+
       Swal.fire({
         icon: "success",
         title: "Verified!",
         text: res.data.message || "OTP verified successfully.",
         confirmButtonColor: "#9F00FF",
       });
+
       setTimeout(() => router.push("/Dashboard"), 2000);
     } catch (err) {
       Swal.fire({
@@ -83,7 +82,9 @@ export default function VerifyOTPPage() {
           <h1 className="text-2xl font-bold text-gray-800">Verify OTP</h1>
           <p className="text-gray-500 text-sm text-center mt-1">
             Enter the 6-digit code sent to <br />
-            <span className="font-medium text-gray-700">{email}</span>
+            <span className="font-medium text-gray-700">
+              {email || "your email"}
+            </span>
           </p>
         </div>
 
@@ -93,7 +94,7 @@ export default function VerifyOTPPage() {
               key={index}
               ref={(el) => (inputsRef.current[index] = el)}
               type="text"
-              maxLength="1"
+              maxLength={1}
               value={digit}
               onChange={(e) => handleChange(e, index)}
               onKeyDown={(e) => handleKeyDown(e, index)}
@@ -103,12 +104,11 @@ export default function VerifyOTPPage() {
         </div>
 
         <button
-          type="button"
           onClick={handleVerify}
           disabled={isLoading || !email}
-          className={`w-full py-3 rounded-lg text-white font-semibold transition-all duration-500 ${
-            isLoading
-              ? "opacity-50 cursor-not-allowed bg-gray-300 text-gray-600"
+          className={`w-full py-3 rounded-lg text-white font-semibold transition-all ${
+            isLoading || !email
+              ? "bg-gray-400 cursor-not-allowed"
               : "bg-gradient-to-r from-[#9F00FF] to-[#F2521E] hover:opacity-90"
           }`}
         >
@@ -126,5 +126,20 @@ export default function VerifyOTPPage() {
         </p>
       </div>
     </div>
+  );
+}
+
+// This is the actual page with the required Suspense boundary
+export default function VerifyOtpPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center bg-gray-50">
+          <div className="text-xl text-gray-600">Loading...</div>
+        </div>
+      }
+    >
+      <VerifyOTPContent />
+    </Suspense>
   );
 }
