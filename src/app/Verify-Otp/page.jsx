@@ -1,4 +1,7 @@
+export const dynamic = 'force-dynamic';
+
 "use client";
+
 import React, { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Swal from "sweetalert2";
@@ -110,10 +113,7 @@ export default function VerifyOTPPage() {
 
         <p className="text-center text-sm text-gray-400 mt-6">
           Didn’t get a code?{" "}
-          <a
-            href="#"
-            className="text-[#9F00FF] font-medium hover:underline"
-          >
+          <a href="#" className="text-[#9F00FF] font-medium hover:underline">
             Resend OTP
           </a>
         </p>
