@@ -6,8 +6,6 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { IoShieldCheckmarkOutline } from "react-icons/io5";
 
-export const dynamic = "force-dynamic";
-
 export default function VerifyOTPPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
