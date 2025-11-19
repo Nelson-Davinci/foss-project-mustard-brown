@@ -55,7 +55,7 @@ export async function sendMail({
       theme: "default",
       product: {
         name: "OpenTask",
-        link: process.env.CLIENT_URL || "https://opentask.vercel.app",
+        link: process.env.CLIENT_URL || "https://foss-project-mustard-brown.vercel.app/",
       },
     });
 
