@@ -28,6 +28,7 @@ export default function page() {
     setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
+  // Validation Logic
   const Validate = () => {
     const newErrors = {};
     if (!formData.fullName.trim())
@@ -42,6 +43,7 @@ export default function page() {
     return Object.keys(newErrors).length === 0;
   };
 
+  // handle submit logic
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!Validate()) return;
