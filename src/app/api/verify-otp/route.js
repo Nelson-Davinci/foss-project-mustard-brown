@@ -1,7 +1,7 @@
 import UserModel from "@/Models/User";
 import DBconnect from "@/Utils/DBconnect";
 import { NextResponse } from "next/server";
-import jwt from "jsonwebtoken";
+import { generateAccessToken } from "@/Utils/generateToken"; // Centralized utility
 
 export async function POST(req) {
   try {
@@ -22,7 +22,7 @@ export async function POST(req) {
     }
 
     // ✅ OTP verified successfully
-    const isFirstLogin = !user.lastLogin; // Check if it's the first login
+    const isFirstLogin = !user.lastLogin;
 
     // Clear OTP fields
     user.otp = undefined;
@@ -32,11 +32,10 @@ export async function POST(req) {
     user.lastLogin = new Date();
     await user.save();
 
-    // Generate token
-    const token = jwt.sign(
+    // Generate token using your utility
+    const token = generateAccessToken(
       { id: user._id, email: user.email },
-      process.env.JWT_SECRET,
-      { expiresIn: "1d" } // token valid for 1 day
+      { expiresIn: "1d" }
     );
 
     // Response object
@@ -46,7 +45,7 @@ export async function POST(req) {
         message: "OTP Verified Successfully",
         email: user.email,
         token,
-        isFirstLogin, // 👈 include this in the response
+        isFirstLogin,
       },
       { status: 200 }
     );
@@ -55,7 +54,7 @@ export async function POST(req) {
     response.cookies.set("authToken", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      maxAge: 24 * 60 * 60, // 1 day
+      maxAge: 24 * 60 * 60,
       path: "/",
     });
 
