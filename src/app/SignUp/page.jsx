@@ -27,6 +27,7 @@ export default function page() {
     setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
+  // Validation Logic
   const Validate = () => {
     const newErrors = {};
     if (!formData.fullName.trim())
