@@ -52,7 +52,7 @@ export async function POST(req) {
     const mailOptions = {
       from: `"OpenTask" <${process.env.EMAIL_USER}>`,
       to: user.email,
-      subject: "Your 2FA Verification Code",
+      subject: "Email Verification - 2FA Verification Code",
       html: `
         <div style="font-family:Arial,sans-serif;padding:20px">
           <h2>🔐 Two-Factor Authentication</h2>

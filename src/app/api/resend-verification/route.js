@@ -42,7 +42,18 @@ export async function POST(req) {
         <h2>Hello ${user.name || "User"},</h2>
         <p>We noticed you haven’t verified your email yet.</p>
         <p>Please click the link below to verify your account:</p>
-        <a href="${verifyURL}" style="color:blue;">Verify Email</a>
+         <a href="${verifyURL}" 
+         style="
+            display:inline-block;
+            padding:10px 20px;
+            background:#4CAF50;
+            color:white;
+            text-decoration:none;
+            border-radius:5px;
+            font-weight:bold;
+         ">
+        Verify Email
+      </a>
       `,
     });
 
