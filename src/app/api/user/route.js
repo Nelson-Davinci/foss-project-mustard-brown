@@ -41,16 +41,9 @@ export async function POST(req) {
 
     // Send verification email using reusable utility
     await sendMail({
-      to: email,
-      subject: "Verify your email",
-      fullname: fullName,
-      intro: [
-        `Hello ${fullName},`,
-        "Welcome to OpenTask! Please verify your email by clicking the button below.",
-      ],
-      btnText: "Verify Email",
-      instructions:
-        "Click the button to verify your account. Link expires in 24 hours.",
+      to: newUser.email,
+      type: "verify",
+      fullname: newUser.fullName,
       link: verifyURL,
     });
 

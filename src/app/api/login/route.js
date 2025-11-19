@@ -34,7 +34,7 @@ export async function POST(req) {
     // Send OTP using reusable sendMail utility
     await sendMail({
       to: user.email,
-      subject: "Your OpenTask 2FA Code",
+      type: "otp",
       fullname: user.fullName || user.email.split("@")[0], // nicer fallback
       otp: otpCode,
     });
