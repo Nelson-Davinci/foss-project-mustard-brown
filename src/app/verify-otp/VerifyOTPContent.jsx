@@ -67,6 +67,28 @@ export default function VerifyOTPContent() {
     }
   };
 
+  const handleResendOTP = async () => {
+    setIsLoading(true);
+    try {
+      await axios.post("/api/resend-otp", { email });
+      Swal.fire({
+        icon: "success",
+        title: "OTP Resent",
+        text: "A new OTP has been sent to your email.",
+        confirmButtonColor: "#9F00FF",
+      });
+    } catch (err) {
+      Swal.fire({
+        icon: "error",
+        title: "Resend Failed",
+        text: err.response?.data?.message || "Could not resend OTP.",
+        confirmButtonColor: "#F2521E",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 relative px-4">
       <div className="bg-white w-full max-w-md p-8 rounded-2xl shadow-lg relative z-10">
@@ -110,7 +132,8 @@ export default function VerifyOTPContent() {
 
         <p className="text-center text-sm text-gray-400 mt-6">
           Didn’t get a code?{" "}
-          <button type="button" className="text-[#9F00FF] font-medium hover:underline">
+          <button type="button" className="text-[#9F00FF] font-medium hover:underline"
+          onClick={handleResendOTP}>
             Resend OTP
           </button>
         </p>
