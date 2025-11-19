@@ -15,11 +15,16 @@ export async function POST(req) {
     }
 
     if (user.isVerified) {
-      return NextResponse.json({ message: "User is already verified" }, { status: 400 });
+      return NextResponse.json(
+        { message: "User is already verified" },
+        { status: 400 }
+      );
     }
 
     // Generate new verification token
-    const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: "1d" });
+    const token = jwt.sign({ email }, process.env.JWT_SECRET, {
+      expiresIn: "1d",
+    });
     user.verificationToken = token;
     await user.save();
 
@@ -38,8 +43,11 @@ export async function POST(req) {
       from: `"OpenTask" <${process.env.EMAIL_USER}>`,
       to: email,
       subject: "Verify your email (Resent)",
+      text: `Hello ${
+        user.fullName || "User"
+      }, Please verify your email by clicking the following link: ${verifyURL}`,
       html: `
-        <h2>Hello ${user.name || "User"},</h2>
+        <h2>Hello ${user.fullName || "User"},</h2>
         <p>We noticed you haven’t verified your email yet.</p>
         <p>Please click the link below to verify your account:</p>
          <a href="${verifyURL}" 
@@ -57,7 +65,10 @@ export async function POST(req) {
       `,
     });
 
-    return NextResponse.json({ message: "Verification email resent successfully!" }, { status: 200 });
+    return NextResponse.json(
+      { message: "Verification email resent successfully!" },
+      { status: 200 }
+    );
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: "Server error" }, { status: 500 });
