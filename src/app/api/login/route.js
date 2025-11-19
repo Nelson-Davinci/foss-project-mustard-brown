@@ -34,15 +34,9 @@ export async function POST(req) {
     // Send OTP using reusable sendMail utility
     await sendMail({
       to: user.email,
-      subject: "2FA Verification Code",
-      fullname: user.fullName || user.email,
-      intro: [
-        `Hello ${user.fullName || user.email},`,
-        "Your OTP code for login is below. It will expire in 5 minutes.",
-        "If you didn’t request this, please ignore this email."
-      ],
-      btnText: otpCode,
-      instructions: "Use this code to complete your login."
+      subject: "Your OpenTask 2FA Code",
+      fullname: user.fullName || user.email.split("@")[0], // nicer fallback
+      otp: otpCode,
     });
 
     return NextResponse.json(
