@@ -55,7 +55,7 @@ export default function ResetPassword() {
         timer: 3000,
         showConfirmButton: false,
       }).then(() => {
-        router.push("/login");
+        router.push("/Login");
       });
     } catch (err) {
       Swal.fire({
@@ -104,7 +104,7 @@ export default function ResetPassword() {
             alt="OpenTask Logo"
             width={80}
             height={80}
-            className="rounded-xl shadow-lg"
+            className=""
           />
         </div>
 
@@ -167,7 +167,7 @@ export default function ResetPassword() {
 
         {/* Back to Login */}
         <div className="text-center mt-6">
-          <Link href="/login" className="text-sm text-[#f2521e] hover:underline font-medium">
+          <Link href="/Login" className="text-xs text-[#f2521e] hover:underline font-medium">
             ← Back to Login
           </Link>
         </div>

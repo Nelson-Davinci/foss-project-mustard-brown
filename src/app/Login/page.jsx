@@ -207,8 +207,8 @@ export default function Page() {
             )}
           </div>
 
-          <div>
-            <Link href={"/forgot-password"} className="text-xs text-blue-500">Forgot Password</Link>
+          <div className="flex w-full items-center justify-end">
+            <Link href={"/forgot-password"} className="text-xs text-blue-500 underline cursor-pointer">Forgot Password?</Link>
           </div>
 
           {/* Submit Button */}

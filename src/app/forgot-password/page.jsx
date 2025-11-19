@@ -12,14 +12,38 @@ export default function ForgotPassword() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!email.trim() || !/\S+@\S+\.\S+/.test(email)) {
-      Swal.fire({ icon: "error", title: "Invalid Email", text: "Please enter a valid email address." });
+    
+    // Basic validation
+    if (!email.trim()) {
+      Swal.fire({ 
+        icon: "error", 
+        title: "Email Required", 
+        text: "Please enter your email address." 
+      });
+      return;
+    }
+
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      Swal.fire({ 
+        icon: "error", 
+        title: "Invalid Email", 
+        text: "Please enter a valid email address." 
+      });
       return;
     }
 
     setIsLoading(true);
+    
     try {
-      const res = await axios.post("/api/forgot-password", { email });
+      console.log("📤 Sending request with email:", email);
+      
+      const response = await axios.post("/api/forgot-password", { 
+        email: email.trim() 
+      });
+
+      console.log("✅ Response:", response.data);
+
+      // Success!
       Swal.fire({
         icon: "success",
         title: "Check Your Email 📧",
@@ -27,16 +51,49 @@ export default function ForgotPassword() {
           <p class="text-sm">We've sent a password reset link to</p>
           <p class="font-semibold text-purple-600">${email}</p>
           <p class="text-xs mt-2 text-gray-600">Click the link in the email to reset your password.</p>
+          <p class="text-xs mt-2 text-gray-500">The link expires in 15 minutes.</p>
         `,
-        timer: 5000,
-        showConfirmButton: false,
+        timer: 6000,
+        showConfirmButton: true,
+        confirmButtonColor: "#9f00ff",
       });
-    } catch (err) {
-      Swal.fire({
-        icon: "error",
-        title: "Not Found",
-        text: err.response?.data?.message || "No account found with that email.",
-      });
+
+      // Clear input on success
+      setEmail("");
+
+    } catch (error) {
+      console.error("❌ Error:", error);
+      console.error("Error response:", error.response?.data);
+
+      // Handle different error cases
+      const errorMessage = error.response?.data?.message || "Something went wrong. Please try again.";
+      const statusCode = error.response?.status;
+
+      if (statusCode === 404) {
+        // Email not found
+        Swal.fire({
+          icon: "error",
+          title: "Not Found",
+          text: "No account found with that email address.",
+          confirmButtonColor: "#f2521e",
+        });
+      } else if (statusCode === 400) {
+        // Validation error
+        Swal.fire({
+          icon: "error",
+          title: "Invalid Input",
+          text: errorMessage,
+          confirmButtonColor: "#f2521e",
+        });
+      } else {
+        // Server error or network issue
+        Swal.fire({
+          icon: "error",
+          title: "Oops!",
+          text: errorMessage,
+          confirmButtonColor: "#f2521e",
+        });
+      }
     } finally {
       setIsLoading(false);
     }
@@ -73,7 +130,7 @@ export default function ForgotPassword() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="your@email.com"
             className="w-full h-10 pl-12 pr-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#9f00ff]/50 transition"
-            required
+            disabled={isLoading}
           />
         </div>
 
@@ -88,15 +145,18 @@ export default function ForgotPassword() {
             }`}
         >
           {isLoading ? (
-            <div className="w-6 h-6 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+            <>
+              <div className="w-5 h-5 border-3 border-white border-t-transparent rounded-full animate-spin"></div>
+              <span>Sending...</span>
+            </>
           ) : (
             "Send Reset Link"
           )}
         </button>
 
         {/* Back to Login */}
-        <div className="text-center mt-6">
-          <Link href="/Login" className="text-sm text-[#f2521e] hover:underline font-medium">
+        <div className="text-center mt-4">
+          <Link href="/Login" className="text-xs text-[#f2521e] hover:underline font-medium">
             ← Back to Login
           </Link>
         </div>
