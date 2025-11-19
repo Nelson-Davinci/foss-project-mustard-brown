@@ -1,6 +1,12 @@
 // Improved: Added header comments and variable renaming for clarity
 
 // Handles user login and sends OTP for verification
+import { NextResponse } from "next/server";
+import DBconnect from "@/Utils/DBconnect";
+import UserModel from "@/Models/User";
+import bcrypt from "bcryptjs";
+import nodemailer from "nodemailer";
+
 export async function POST(req) {
   try {
     // Parse request body
