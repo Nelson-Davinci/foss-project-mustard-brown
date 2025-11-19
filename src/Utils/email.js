@@ -18,7 +18,7 @@ export const sendMail = async ({
     const mailGenerator = new Mailgen({
       theme: "default",
       product: {
-        name: "Instashots",
+        name: "OpenTask",
         link:
           process.env.CLIENT_URL || "https://instaclone-self-six.vercel.app",
       },
