@@ -11,7 +11,7 @@ export default function DashboardClient() {
 
   return (
     <div className="relative flex h-screen w-full overflow-hidden">
-      {/* Sidebar - Slide in/out on mobile */}
+      {/* Sidebar */}
       <aside
         className={`
           fixed inset-y-0 left-0 z-50 bg-white border-r border-gray-300
