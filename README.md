@@ -69,34 +69,54 @@ OpenTask is a full-stack web application that lets teams create, assign, and tra
 ├─ 🎨 postcss.config.mjs
 ├─ 📦 package.json
 └─ 📖 README.md
+```
+<br><br>
 
+## 🧰 Getting Started
+Follow these simple steps to run OpenTask on your machine:
+<br>
+### Step 1: Clone the Repository
+```bash
+git clone https://github.com/BU-SENG/foss-project-mustard-brown.git
+cd foss-project-mustard-brown
+```
+<br>
 
+### Step 2: Install Dependencies
+```bash
+npm install
+```
+<br>
 
-🧰 Getting Started (Local Development)#
-
-1. Clone the repository
-git clone https://github.com/<your-org-or-username>/collaborative-task-app.git
-cd collaborative-task-app
-
-2. Install dependencies: npm install
-
-3. Set up environment variables
-
-Create a .env.local file in the project root:
-
-MONGODB_URL="your mongodb url here"
-EMAIL_USER="your email here"
-EMAIL_PASS="your email pass key here"
+### Step 3: Set up Environment Variables
+Create a .env.local file in the project root and add the following:
+```bash
+MONGODB_URI="your_mongodb_atlas_or_local_url_here"
+EMAIL_USER="your-email@gmail.com"
+EMAIL_PASS="your-app-password-or-smtp-key"
 NEXT_PUBLIC_BASE_URL="http://localhost:3000"
-JWT_SECRET="your jwt secret here"
-GOOGLE_CLIENT_ID="your google client id here"
-GOOGLE_CLIENT_SECRET="your google client secret here"
+JWT_SECRET="a-very-strong-secret-key-at-least-32-chars"
+GOOGLE_CLIENT_ID="your-google-client-id.apps.googleusercontent.com"
+GOOGLE_CLIENT_SECRET="your-google-client-secret"
+```
+Tip: Use .env.example (already in the repo) as a template, just copy it to .env.local and fill in your values.
 
+<br>
 
-4. Start the development server: npm run dev
+### Step 4: Run the Deployment Server
+```bash
+npm run dev
+```
 
+<br>
 
-Preview the production build: npm start
+### Production Build (Optional)
+```bash
+npm run build   # Build the app
+npm start       # Start production server
+```
+
+<br>
 
 
 🌍 Deployment (Vercel)
