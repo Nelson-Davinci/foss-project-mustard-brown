@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import TasksClient from "./TasksClient";
 
 export default async function TasksPage() {
+  // Check for authentication token in cookies
   const cookieStore = cookies();
   const token = cookieStore.get("authToken")?.value;
 
