@@ -4,7 +4,7 @@ OpenTask is a full-stack web application that lets teams create, assign, and tra
 
 <br>
 
-## 📸 OpenTask Screenshots
+## OpenTask Screenshots
 
 <div>
 
@@ -19,7 +19,7 @@ OpenTask is a full-stack web application that lets teams create, assign, and tra
 
 <br><br>
 
-## ✨ Key Features
+## Key Features
 
 - Real-time task updates (MongoDB Change Streams)
 - Create & assign tasks with priority, due dates, and rich descriptions
@@ -48,32 +48,32 @@ OpenTask is a full-stack web application that lets teams create, assign, and tra
 
 <br><br>
 
-## 📂 Project Structure
+## Project Structure
 
 ```plaintext
-├─ 📂 .next/                  # Auto-generated build folder
-├─ 📂 node_modules/           # Dependencies
-├─ 📂 public/                 # Static files (logos, icons)
-├─ 📂 src/
-│  ├─ 📂 app/                 # Pages, layouts & API routes (App Router)
-│  ├─ 📂 Components/          # Reusable UI components
-│  ├─ 📂 Constants/           # Enums & config values
-│  ├─ 📂 Models/              # MongoDB schemas
-│  ├─ 📂 Utils/               # Helpers & utilities
-│  └─ 📂 UIUX Design/         # Figma / design files
-├─ 🔒 .env                    # Secret keys (never commit!)
-├─ 📄 .env.example            # Public env template
-├─ 🚫 .gitignore
-├─ 🧹 eslint.config.mjs
-├─ 🛠  jsconfig.json
-├─ ⚙️  next.config.mjs
-├─ 🎨 postcss.config.mjs
-├─ 📦 package.json
-└─ 📖 README.md
+├─ .next/                  # Auto-generated build folder
+├─ node_modules/           # Dependencies
+├─ public/                 # Static files (logos, icons)
+├─ src/
+│  ├─ app/                 # Pages, layouts & API routes (App Router)
+│  ├─ Components/          # Reusable UI components
+│  ├─ Constants/           # Enums & config values
+│  ├─ Models/              # MongoDB schemas
+│  ├─ Utils/               # Helpers & utilities
+│  └─ UIUX Design/         # Figma / design files
+├─ .env                    # Secret keys (never commit!)
+├─ .env.example            # Public env template
+├─ .gitignore
+├─  eslint.config.mjs
+├─  jsconfig.json
+├─  next.config.mjs
+├─ postcss.config.mjs
+├─ package.json
+└─ README.md
 ```
 <br><br>
 
-## 🧰 Getting Started
+## Getting Started
 Follow these simple steps to run OpenTask on your machine:
 <br>
 ### Step 1: Clone the Repository
@@ -119,7 +119,7 @@ npm start       # Start production server
 
 <br><br>
 
-## 🌍 Deploy on Vercel (One-Click, Zero Config)
+## Deploy on Vercel (One-Click, Zero Config)
 
 The easiest and fastest way to deploy OpenTask:
 
@@ -142,7 +142,7 @@ Your live app will be at: `https://your-project-name.vercel.app`
 
 <br><br>
 
-## 👥 Contributors – The Amazing Team
+## Contributors – The Amazing Team
 
 22/0250 NDUBUISI MIRACLE DAVID<br>
 23/0221 NELSON-NWANONEZE DAVID TOCHUKWU<br>
@@ -157,7 +157,7 @@ Your live app will be at: `https://your-project-name.vercel.app`
 
 <br>
 
-## 📬 Support
+## Support
 
 For inquiries, feedback, or contributions, please open an issue or submit a pull request on GitHub.
 
