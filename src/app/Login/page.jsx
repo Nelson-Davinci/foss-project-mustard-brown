@@ -175,7 +175,6 @@ export default function Page() {
               <p className="text-red-500 text-xs">{errors.email}</p>
             )}
           </div>
-
           {/* Password */}
           <div className="flex flex-col space-y-1">
             <label className="text-sm">Password</label>
@@ -206,13 +205,20 @@ export default function Page() {
               <p className="text-red-500 text-xs">{errors.password}</p>
             )}
           </div>
-
+          <div className="flex w-full items-center justify-end">
+            <Link
+              href={"/forgot-password"}
+              className="text-xs text-blue-500 underline cursor-pointer"
+            >
+              Forgot Password?
+            </Link>
+          </div>
           {/* Submit Button */}
-          <div className="mt-4 w-full">
+          <div className="mt-2 w-full">
             <button
               type="submit"
               disabled={isLoading}
-              className={`py-2.5 text-sm font-semibold px-6 w-full rounded-lg flex items-center justify-center gap-2 transition-all duration-500 
+              className={`py-2.5 cursor-pointer text-sm font-semibold px-6 w-full rounded-lg flex items-center justify-center gap-2 transition-all duration-500 
                 ${
                   isLoading
                     ? "opacity-50 cursor-not-allowed bg-gray-300 text-gray-500"
@@ -226,11 +232,11 @@ export default function Page() {
               )}
             </button>
           </div>
-
-          {/* <div className="w-full text-center mt-4">
+          <div className="w-full text-center mt-2">
             <button
               type="button"
-              className="py-2.5 text-sm font-semibold px-6 w-full rounded-lg flex items-center justify-center gap-2 bg-white text-[#4285F4] border border-gray-300 hover:bg-gray-50 transition"
+              className="py-2.5 text-sm font-semibold px-6 w-full rounded-lg flex items-center justify-center gap-2 bg-white border border-gray-300 hover:bg-gray-50 transition-all
+             bg-gradient-to-r from-[#f2521e] to-[#9f00ff] bg-clip-text text-transparent cursor-pointer"
               onClick={() => (window.location.href = "/api/login/google")}
             >
               <img
@@ -254,8 +260,8 @@ export default function Page() {
               />
               Sign in with GitHub
             </button>
-          </div> */}
-
+          </div>{" "}
+          */}
           {/* Sign Up Link */}
           <div className="w-full text-center mt-4">
             <p className="text-xs text-gray-400">

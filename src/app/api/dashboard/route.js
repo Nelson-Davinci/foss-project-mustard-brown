@@ -37,7 +37,7 @@ export async function GET(req) {
     }));
     const totalTeamMembers = uniqueTeamMembers.size;
 
-    // === RECENT PROJECTS ===
+    // == RECENT PROJECTS ==
     const recentProjectsRaw = await ProjectModel.find({
       $or: [{ createdBy: userId }, { teamMembers: userId }],
     })

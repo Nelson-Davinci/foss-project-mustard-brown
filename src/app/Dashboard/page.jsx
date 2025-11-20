@@ -1,10 +1,10 @@
-// app/Dashboard/page.jsx   ← This stays a SERVER COMPONENT
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import { redirect } from "next/navigation";
-import DashboardClient from "./DashboardClient"; // ← New client wrapper
+import DashboardClient from "./DashboardClient";
 
 export default async function DashboardPage() {
+  // Check for authentication token in cookies
   const cookieStore = cookies();
   const token = cookieStore.get("authToken")?.value;
 
@@ -17,6 +17,5 @@ export default async function DashboardPage() {
     redirect("/Login");
   }
 
-  // Everything is secure → now pass control to client component
   return <DashboardClient />;
 }
