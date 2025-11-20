@@ -17,7 +17,7 @@ export async function POST(req) {
       );
     }
 
-    // Verify token
+    // Verify Token
     let decoded;
     try {
       decoded = jwt.verify(token, process.env.JWT_SECRET);
