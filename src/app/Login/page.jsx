@@ -227,11 +227,11 @@ export default function Page() {
             </button>
           </div>
 
-          <div className="w-full text-center mt-4">
+          {/* <div className="w-full text-center mt-4">
             <button
-              type="submit"
+              type="button"
               className="py-2.5 text-sm font-semibold px-6 w-full rounded-lg flex items-center justify-center gap-2 bg-white text-[#4285F4] border border-gray-300 hover:bg-gray-50 transition"
-              onClick={() => (window.location.href = "/api/login/google")} // Adjust path if yours is different
+              onClick={() => (window.location.href = "/api/login/google")}
             >
               <img
                 src="/google-logo.png"
@@ -241,6 +241,20 @@ export default function Page() {
               Sign in with Google
             </button>
           </div>
+          <div className="w-full text-center mt-2">
+            <button
+              type="button"
+              className="py-2.5 text-sm font-semibold px-6 w-full rounded-lg flex items-center justify-center gap-2 bg-black text-white border border-gray-900 hover:bg-gray-800 transition"
+              onClick={() => (window.location.href = "/api/login/github")}
+            >
+              <img
+                src="/github-logo.png"
+                alt="GitHub logo"
+                className="w-5 h-5 mr-2 invert"
+              />
+              Sign in with GitHub
+            </button>
+          </div> */}
 
           {/* Sign Up Link */}
           <div className="w-full text-center mt-4">
