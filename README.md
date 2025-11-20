@@ -2,9 +2,9 @@
 
 OpenTask is a full-stack web application that lets teams create, assign, and track tasks in real time. Built for students, startups, and remote teams, it combines the simplicity of Trello with real-time updates, role-based access, email/Google login, notifications, and a clean responsive UI all in one easy-to-deploy package.
 
-<br><br>
+<br>
 
-### 📸 OpenTask Screenshots
+## 📸 OpenTask Screenshots
 
 <div align="center">
 
@@ -118,8 +118,6 @@ npm start       # Start production server
 ```
 
 <br><br>
-
-<br><br><br>
 
 ## 🌍 Deploy on Vercel (One-Click, Zero Config)
 
